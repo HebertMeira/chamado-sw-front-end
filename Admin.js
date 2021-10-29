@@ -94,9 +94,22 @@ export default class Admin extends Component {
 			</Button>
         </FormControl>
 		<FormControl style={{paddingLeft:20, paddingRight:20}}>
-			<ul>
-			  { this.state.data.length && this.state.data.map(d => <li key={d.problem}>{d.problem}</li>) }
-			</ul>
+			<table>
+				<tr>
+					<th>Problema Enfrentado</th>
+					<th>Resultado Esperado</th>
+					<th>Informações Complementares</th>
+					<th>Tipo</th>
+					<th>Data da Solicitação</th>
+				</tr>
+				<tr>
+					<td>{ this.state.data.length && this.state.data.map(d => <li key={d.problem}>{d.problem}</li>) }</td>
+					<td>{ this.state.data.length && this.state.data.map(d => <li key={d.expectedResult}>{d.expectedResult}</li>) }</td>
+					<td>{ this.state.data.length && this.state.data.map(d => <li key={d.additionalInformation}>{d.additionalInformation}</li>) }</td>
+					<td>{ this.state.data.length && this.state.data.map(d => <li key={d.type}>{d.type}</li>) }</td>
+					<td>{ this.state.data.length && this.state.data.map(d => <li key={d.openingDate}>{d.openingDate}</li>) }</td>
+				</tr>
+			</table>
         </FormControl>
       </Container>
 	 </NativeBaseProvider>
