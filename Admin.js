@@ -15,7 +15,7 @@ import InputDatetimeLocal from 'react-input-datetime-local';
 export default class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = {problem: '', expectedResult: '', additionalInformation: '', type: '', openingDate: ''};
+    this.state = {problem: '', expectedResult: '', additionalInformation: '', type: '', openingDate: '', data:''};
   }
   
   register = (navigation) => {
@@ -23,7 +23,7 @@ export default class Admin extends Component {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         problem: this.state.problem,
@@ -40,6 +40,31 @@ export default class Admin extends Component {
     .catch((error) => {
       alert(error);
     });
+	
+	this.listSolicitations();
+  }
+  
+  listSolicitations = () => {
+	fetch('http://127.0.0.1:3333/solicitations/list',{
+	  method: 'GET',
+	  headers: {
+		Accept: 'application/json',
+		'Content-Type': 'application/json'
+	  }	
+	})
+	.then(response => response.json())
+	.then(data => this.setState({data}))
+    .catch((error) => {
+      alert(error);
+    });
+  }
+  
+  componentDidMount() {
+    this.listSolicitations();
+  }
+  
+  componentDidUpdate(){
+	this.listSolicitations();
   }
   
   render() {
@@ -69,7 +94,9 @@ export default class Admin extends Component {
 			</Button>
         </FormControl>
 		<FormControl style={{paddingLeft:20, paddingRight:20}}>
-			Teste
+			<ul>
+			  { this.state.data.length && this.state.data.map(d => <li key={d.problem}>{d.problem}</li>) }
+			</ul>
         </FormControl>
       </Container>
 	 </NativeBaseProvider>
