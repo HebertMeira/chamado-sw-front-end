@@ -1,11 +1,11 @@
-# chamado-sw-front-end
+# Chamado-sw-front-end
 
 - FrontEnd do sistema de chamados
 
-##Configuration
+# Configuration
 
 - npm install
 
-##Run application
+# Run application
 
 - npm start
