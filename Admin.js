@@ -114,12 +114,19 @@ export default class Admin extends Component {
     });
   }
   
+  registerUser = (navigation) => {
+	navigation.navigate('RegisterUser');
+  }
+  
   render() {
     const { navigation } = this.props;
     const { problem, expectedResult, additionalInformation, type, openingDate, orderStatus } = this.state;
     return (
 	<NativeBaseProvider>
       <Container>
+		<Box header style={{alignSelf:'center'}}>
+          <Image source={require('./assets/logo.png')} />
+        </Box>
         <FormControl style={{paddingLeft:20, paddingRight:20}}>
 			<FormControl.Label _text={{bold: true}}>Problema Enfrentado</FormControl.Label>	
 			<Input placeholder="Problema Enfrentado" value={this.state.problem} onChangeText={(problem) => this.setState({problem})}/>
@@ -147,6 +154,9 @@ export default class Admin extends Component {
 			
 			<Button onPress={() => this.register(navigation)} mt="5" colorScheme="cyan">
 			  Cadastrar
+			</Button>
+			<Button onPress={() => this.registerUser(navigation)} mt="5" colorScheme="cyan">
+			  Cadastrar Usuario
 			</Button>
         </FormControl>
 		<FormControl style={{paddingLeft:20, paddingRight:11, width:'120%'}}>
